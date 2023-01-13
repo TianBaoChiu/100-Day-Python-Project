@@ -6,7 +6,7 @@ class Score (Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        self.hight_score = self.get_hight_score()
         self.penup()
         self.goto(0, 260)
         self.hideturtle()
@@ -23,8 +23,10 @@ class Score (Turtle):
         self.update_score()
 
     def reset(self):
-        if self.score > self.high_score:
+        if self.score > int(self.high_score):
             self.high_score = self.score
+            with open("C:/Code/Project/100-Day-Python-Project/Day24_HIgh_score_snake_game/score.txt", mode='w') as f:
+                f.write(str(self.high_score))
         self.score = 0
         self.update_score()
 
@@ -32,3 +34,9 @@ class Score (Turtle):
     #     self.goto(0, 0)
     #     self.write(f"Game over",
     #                align='center', font=('Arial', 24, 'normal'))
+
+    def get_hight_score(self):
+        with open("C:/Code/Project/100-Day-Python-Project/Day24_HIgh_score_snake_game/score.txt", mode='r') as f:
+            self.high_score = f.read()
+
+            return self.high_score
